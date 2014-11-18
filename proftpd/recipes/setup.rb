@@ -11,7 +11,7 @@ ftp_group = node[:proftpd][:group][:name]
 
 Chef::Log.debug("Install proftpd and create group and user")
 
-packages "proftpd" do
+package "proftpd" do
   action :install
   options '--force-yes'
 end
