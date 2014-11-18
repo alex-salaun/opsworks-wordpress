@@ -9,7 +9,7 @@ instance            = node[:opsworks][:layers].fetch(layer)[:instances].first[1]
 Chef::Log.info("Instance : #{instance}")
 instance_elastic_ip = instance[:elastic_ip]
 Chef::Log.info("Instance_elastic_ip : #{instance_elastic_ip}")
-application_name    = node[:opsworks][:applications][0][:name]
+application_name    = node[:opsworks][:applications][0][:name].gsub('-', '_')
 Chef::Log.info("application_name : #{application_name}")
 Chef::Log.info("deploy attributes : #{deploy}")
 Chef::Log.info("deploy attributes app : #{deploy[application_name.to_sym]}")

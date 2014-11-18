@@ -9,7 +9,8 @@ instance_dns_name   = instance[:public_dns_name]
 Chef::Log.info("instance_dns_name : #{instance_dns_name}")
 instance_elastic_ip = instance[:elastic_ip]
 Chef::Log.info("instance_elastic_ip : #{instance_elastic_ip}")
-application_name    = node[:opsworks][:applications][0][:name]
+# application_name    = node[:opsworks][:applications][0][:name]
+application_name    = node[:opsworks][:applications][0][:name].gsub('-', '_')
 Chef::Log.info("application_name : #{application_name}")
 password            = deploy[application_name.to_sym][:environment][:ftp_user_password]
 Chef::Log.info("password : #{password}")
