@@ -19,5 +19,12 @@ Available recipes for [AWS OpsWorks Lifecycle Events](http://docs.aws.amazon.com
 * **Configure**: wordpress::configure; Create wp-config.php file along with Cronjob
 
 
+## ProFTPd
+
+Install and configure proftpd :
+
+* **Configure**: proftpd::setup;
+
+
 ## Other
 All other cookbooks are currently in a work-in-progress state and might not work.
