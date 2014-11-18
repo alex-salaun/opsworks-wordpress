@@ -8,9 +8,10 @@ instance            = node[:opsworks][:layers].fetch(layer)[:instances].first[1]
 instance_elastic_ip = instance[:elastic_ip]
 application_name    = node[:opsworks][:applications][0][:name].gsub('-', '_')
 password            = deploy[application_name.to_sym][:environment][:ftp_user_password]
+user_name           = deploy[application_name.to_sym][:environment][:ftp_user_name]
 
 default['wordpress']['wp_config']['ftp_host'] = instance_elastic_ip
-default['wordpress']['wp_config']['ftp_user'] = "ftpuser"
+default['wordpress']['wp_config']['ftp_user'] = user_name
 default['wordpress']['wp_config']['ftp_pass'] = password
 
 # Enable the Wordpress W3 Total Cache plugin (http://wordpress.org/plugins/w3-total-cache/)?
