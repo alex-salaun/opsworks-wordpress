@@ -8,6 +8,7 @@
 
 ftp_user  = node[:proftpd][:user][:name]
 ftp_group = node[:proftpd][:group][:name]
+password  = node[:proftpd][:user][:password]
 
 Chef::Log.debug("Install proftpd and create group and user")
 
@@ -17,7 +18,6 @@ package "proftpd" do
 end
 
 user node[:proftpd][:user][:name] do
-  password node[:proftpd][:user][:password]
   shell "/bin/bash"
 end
 
@@ -28,6 +28,7 @@ script "set_locale" do
   code <<-EOH
   groupadd #{ftp_group}
   adduser #{ftp_user} #{ftp_group}
+  usermod -p $(echo #{password} | openssl passwd -1 -stdin) #{ftp_user}
   EOH
 end
 
