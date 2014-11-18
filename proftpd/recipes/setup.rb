@@ -18,6 +18,7 @@ end
 
 user node[:proftpd][:user][:name] do
   password node[:proftpd][:user][:password]
+  shell "/bin/bash"
 end
 
 script "set_locale" do

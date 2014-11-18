@@ -4,18 +4,10 @@
 Chef::Log.info("Set wordpress attributes")
 
 layer               = node[:opsworks][:instance][:layers].first
-Chef::Log.info("Layer : #{layer}")
 instance            = node[:opsworks][:layers].fetch(layer)[:instances].first[1]
-Chef::Log.info("Instance : #{instance}")
 instance_elastic_ip = instance[:elastic_ip]
-Chef::Log.info("Instance_elastic_ip : #{instance_elastic_ip}")
 application_name    = node[:opsworks][:applications][0][:name].gsub('-', '_')
-Chef::Log.info("application_name : #{application_name}")
-Chef::Log.info("deploy attributes : #{deploy}")
-Chef::Log.info("deploy attributes app : #{deploy[application_name.to_sym]}")
-Chef::Log.info("deploy attributes app 2 : #{deploy[application_name]}")
 password            = deploy[application_name.to_sym][:environment][:ftp_user_password]
-Chef::Log.info("password : #{password}")
 
 default['wordpress']['wp_config']['ftp_host'] = instance_elastic_ip
 default['wordpress']['wp_config']['ftp_user'] = "ftpuser"
