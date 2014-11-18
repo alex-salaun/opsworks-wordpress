@@ -28,7 +28,7 @@ script "set_locale" do
   code <<-EOH
   groupadd #{ftp_group}
   adduser #{ftp_user} #{ftp_group}
-  usermod -p $(echo #{password} | openssl passwd -1 -stdin) #{ftp_user}
+  usermod -p $(echo "#{password}" | openssl passwd -1 -stdin) #{ftp_user}
   EOH
 end
 
