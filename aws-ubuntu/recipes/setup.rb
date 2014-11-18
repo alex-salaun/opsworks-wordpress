@@ -15,3 +15,14 @@ script "memory_swap" do
   /sbin/swapon /var/swap.1
   EOH
 end
+
+Chef::Log.debug("Set locale to fr_FR.UTF-8")
+
+script "set_locale" do
+  interpreter "bash"
+  user "root"
+  cwd "/"
+  code <<-EOH
+  locale-gen fr_FR.UTF-8
+  EOH
+end

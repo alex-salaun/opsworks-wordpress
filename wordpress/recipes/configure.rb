@@ -20,9 +20,9 @@ keys = response.body
 node[:deploy].each do |app_name, deploy|
     Chef::Log.info("Configuring WP app #{app_name}...")
 
-    if defined?(deploy[:application_type]) && deploy[:application_type] != 'php'                                        
+    if defined?(deploy[:application_type]) && deploy[:application_type] != 'php'
         Chef::Log.debug("Skipping WP Configure  application #{app_name} as it is not defined as php wp")
-        next                                                                       
+        next
     end
 
     template "#{deploy[:deploy_to]}/current/wp-config.php" do
@@ -79,7 +79,7 @@ node[:deploy].each do |app_name, deploy|
             user "root"
             cwd "#{deploy[:deploy_to]}/current/"
             code <<-EOH
-                if ls #{deploy[:deploy_to]}/current/*.sql &> /dev/null; then 
+                if ls #{deploy[:deploy_to]}/current/*.sql &> /dev/null; then
                     #{mysql_command} < #{deploy[:deploy_to]}/current/*.sql;
                     mv #{deploy[:deploy_to]}/current/*.sql /root/;
                     echo "Restore done";
@@ -93,15 +93,25 @@ node[:deploy].each do |app_name, deploy|
             user "root"
             cwd "#{deploy[:deploy_to]}/current/"
             code <<-EOH
-                if ls #{deploy[:deploy_to]}/current/*.sql &> /dev/null; then 
+                if ls #{deploy[:deploy_to]}/current/*.sql &> /dev/null; then
                     mv #{deploy[:deploy_to]}/current/*.sql /root/;
                 fi;
             EOH
         end
     end
 
+    Chef::Log.info("Give rights for wp-contents folder")
+    script "change_rights" do
+        interpreter "bash"
+        user "root"
+        cwd "#{deploy[:deploy_to]}/current/"
+        code <<-EOH
+            chmod -R 777 wp-content/
+        EOH
+    end
+
     # Create a Cronjob for Wordpress
-    domain = deploy[:domains].first 
+    domain = deploy[:domains].first
     command = "wget --http-user=demo --http-passwd=demo -q -O - http://#{domain}/wp-cron.php?doing_wp_cron >/dev/null 2>&1"
     cron "wordpress-#{app_name}" do
         hour "*"

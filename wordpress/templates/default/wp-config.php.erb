@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * The base configurations of the WordPress.
  *
  * This file has the following configurations: MySQL settings, Table Prefix,
@@ -39,6 +39,9 @@ define( 'WP_HOME', 'http://<%= @domain %>' );
 define('ALTERNATE_WP_CRON', false);
 define('DISABLE_WP_CRON', true);
 
+define("FTP_HOST", "<%= node['wordpress']['wp_config']['ftp_host'] %>");
+define("FTP_USER", "<%= node['wordpress']['wp_config']['ftp_user'] %>");
+define("FTP_PASS", "<%= node['wordpress']['wp_config']['ftp_pass'] %>");
 
 /**
  * Authentication Unique Keys.
@@ -52,7 +55,7 @@ define('DISABLE_WP_CRON', true);
 <%= @keys %>
 
 <% if node['wordpress']['wp_config']['enable_W3TC']==true -%>
-/** 
+/**
  * Enable W3 Total Cache
  */
 define('WP_CACHE', true); // Added by W3 Total Cache

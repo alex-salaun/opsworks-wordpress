@@ -1,6 +1,16 @@
 # Default configuration for the AWS OpsWorks cookbook for Wordpress
 #
 
+layer               = node[:opsworks][:instance][:layers].first
+instance            = node[:opsworks][:layers].fetch(layer)[:instances].first
+instance_elastic_ip = instance[:elastic_ip]
+application_name    = node[:opsworks][:applications][0][:name]
+password            = deploy[application_name.to_sym][:environment][:ftp_user_password]
+
+default['wordpress']['wp_config']['ftp_host'] = instance_elastic_ip
+default['wordpress']['wp_config']['ftp_user'] = "ftpuser"
+default['wordpress']['wp_config']['ftp_pass'] = password
+
 # Enable the Wordpress W3 Total Cache plugin (http://wordpress.org/plugins/w3-total-cache/)?
 default['wordpress']['wp_config']['enable_W3TC'] = false
 
