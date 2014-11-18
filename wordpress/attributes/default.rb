@@ -5,7 +5,7 @@ Chef::Log.info("Set wordpress attributes")
 
 layer               = node[:opsworks][:instance][:layers].first
 Chef::Log.info("Layer : #{layer}")
-instance            = node[:opsworks][:layers].fetch(layer)[:instances].first
+instance            = node[:opsworks][:layers].fetch(layer)[:instances][0]
 Chef::Log.info("Instance : #{instance}")
 instance_elastic_ip = instance[:elastic_ip]
 Chef::Log.info("Instance_elastic_ip : #{instance_elastic_ip}")
