@@ -1,0 +1,42 @@
+<VirtualHost *:80>
+  ServerName <%= @domain %>
+  ServerAlias <%= default['apache_alias']['application_name'] %>
+  DocumentRoot /srv/www/<%= default['apache_alias']['application_name'] %>/current
+
+  AliasMatch ^/blog(.*)$ /srv/www/<%= default['apache_alias']['application_name'] %>/current$1
+
+  RewriteEngine On
+  RewriteRule ^(?!/blog/)(.*) <%= default['apache_alias']['siteurl'] %>$1
+
+  <Directory /srv/www/<%= default['apache_alias']['application_name'] %>/current/>
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <Directory ~ "\.svn">
+    Order allow,deny
+    Deny from all
+  </Directory>
+
+  <Directory ~ "\.git">
+    Order allow,deny
+    Deny from all
+  </Directory>
+
+  LogLevel info
+  ErrorLog /var/log/apache2/<%= default['apache_alias']['application_name'] %>-error.log
+  CustomLog /var/log/apache2/<%= default['apache_alias']['application_name'] %>-access.log combined
+  CustomLog /var/log/apache2/<%= default['apache_alias']['application_name'] %>-ganglia.log ganglia
+
+  FileETag none
+
+  RewriteEngine On
+  IncludeOptional /etc/apache2/sites-available/<%= default['apache_alias']['application_name'] %>.conf.d/rewrite*
+
+  SetEnv "ftp_user_password" "<%= default['apache_alias']['ftp_password'] %>"
+  SetEnv "ftp_user_name" "<%= default['apache_alias']['ftp_user_name'] %>"
+
+  IncludeOptional /etc/apache2/sites-available/<%= default['apache_alias']['application_name'] %>.conf.d/local*
+</VirtualHost>

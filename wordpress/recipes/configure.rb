@@ -46,28 +46,6 @@ node[:deploy].each do |app_name, deploy|
         )
     end
 
-    #template "#{deploy[:deploy_to]}/current/wp-content/w3tc-config/master.php" do
-        #source "master.php.erb"
-        #mode 0660
-        #group deploy[:group]
-
-        #if platform?("ubuntu")
-          #owner "www-data"
-       #elsif platform?("amazon")
-          #owner "apache"
-        #end
-
-        #variables(
-            #:database   => (deploy[:database][:database] rescue nil),
-            #:user       => (deploy[:database][:username] rescue nil),
-            #:password   => (deploy[:database][:password] rescue nil),
-            #:host       => (deploy[:database][:host] rescue nil),
-            #:keys       => (keys rescue nil),
-            #:domain     => (deploy[:domains].first)
-        #)
-    #end
-
-
 	# Import Wordpress database backup from file if it exists
 	mysql_command = "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]}  #{deploy[:database][:database]}"
 

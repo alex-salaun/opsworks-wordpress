@@ -9,7 +9,7 @@ instance_elastic_ip = instance[:elastic_ip]
 application_name    = node[:opsworks][:applications][0][:name].gsub('-', '_')
 password            = deploy[application_name.to_sym][:environment][:ftp_user_password]
 user_name           = deploy[application_name.to_sym][:environment][:ftp_user_name]
-siteurl             = deploy[application_name.to_sym][:environment][:blog_siteurl]
+site_url            = deploy[application_name.to_sym][:environment][:blog_siteurl]
 home                = deploy[application_name.to_sym][:environment][:blog_home]
 
 default['wordpress']['wp_config']['ftp_host'] = instance_elastic_ip
@@ -22,5 +22,5 @@ default['wordpress']['wp_config']['enable_W3TC'] = false
 # Force logins via https (http://codex.wordpress.org/Administration_Over_SSL#To_Force_SSL_Logins_and_SSL_Admin_Access)
 default['wordpress']['wp_config']['force_secure_logins'] = false
 
-default['wordpress']['wp_config']['siteurl'] = siteurl
+default['wordpress']['wp_config']['siteurl'] = site_url
 default['wordpress']['wp_config']['home'] = home

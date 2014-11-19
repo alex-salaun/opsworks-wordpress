@@ -33,9 +33,9 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
+define('WP_HOME',"<%= node['wordpress']['wp_config']['home'] %>");
+define('WP_SITEURL',"<%= node['wordpress']['wp_config']['siteurl'] %>");
 
-define( 'WP_SITEURL', 'http://<%= @domain %>' );
-define( 'WP_HOME', 'http://<%= @domain %>' );
 define('ALTERNATE_WP_CRON', false);
 define('DISABLE_WP_CRON', true);
 
@@ -70,9 +70,6 @@ define('COOKIE_DOMAIN', '');
 define('FORCE_SSL_LOGIN', true);
 define('FORCE_SSL_ADMIN', true);
 <% end -%>
-
-define('WP_HOME',"<%= node['wordpress']['wp_config']['home'] %>");
-define('WP_SITEURL',"<%= node['wordpress']['wp_config']['siteurl'] %>");
 
 /**
  * WordPress Database Table prefix.
