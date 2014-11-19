@@ -19,7 +19,7 @@ node[:deploy].each do |app_name, deploy|
       Chef::Log.info("deploy : #{deploy}")
 
       variables(
-          :proxy_url  => deploy[app_name.gsub('-', '_').to_sym][:environment][:proxy_url],
+          :proxy_url  => deploy[:environment][:proxy_url],
           :app_name   => app_name.gsub('-', '_'),
           :domain     => (deploy[:domains].first)
       )

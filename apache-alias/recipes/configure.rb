@@ -21,9 +21,9 @@ node[:deploy].each do |app_name, deploy|
         variables(
             :app_name   => app_name.gsub('-', '_'),
             :domain     => (deploy[:domains].first),
-            :ftp_user   => deploy[app_name.gsub('-', '_').to_sym][:environment][:ftp_user_name],
-            :ftp_pass   => deploy[app_name.gsub('-', '_').to_sym][:environment][:ftp_user_password],
-            :site_url   => deploy[app_name.gsub('-', '_').to_sym][:environment][:blog_siteurl]
+            :ftp_user   => deploy[:environment][:ftp_user_name],
+            :ftp_pass   => deploy[:environment][:ftp_user_password],
+            :site_url   => deploy[:environment][:blog_siteurl]
         )
     end
 
