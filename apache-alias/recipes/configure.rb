@@ -1,4 +1,4 @@
-app_name = default['apache_alias']['application_name']
+app_name = node[:opsworks][:applications][0][:name].gsub('-', '_')
 
 Chef::Log.info("app_name : #{app_name}")
 Chef::Log.info("Configure apache alias")
