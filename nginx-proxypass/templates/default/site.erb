@@ -1,5 +1,5 @@
 upstream unicorn_<%= @domain %> {
- server unix:/srv/www/<%= node[:nginx_proxy][:application_name] %>/shared/sockets/unicorn.sock fail_timeout=0;
+ server unix:/srv/www/<%= @app_name %>/shared/sockets/unicorn.sock fail_timeout=0;
 }
 
 server {
@@ -10,7 +10,7 @@ server {
 
   keepalive_timeout 5;
 
-  root /srv/www/<%= node[:nginx_proxy][:application_name] %>/current/public/;
+  root /srv/www/<%= @app_name %>/current/public/;
 
   location / {
     try_files $uri/index.html $uri/index.htm @unicorn;
@@ -41,12 +41,12 @@ server {
 
   error_page 500 502 503 504 /500.html;
   location = /500.html {
-    root /srv/www/<%= node[:nginx_proxy][:application_name] %>/current/public/;
+    root /srv/www/<%= @app_name %>/current/public/;
   }
 
   location /blog {
     proxy_redirect off;
     proxy_cache off;
-    proxy_pass <%= node[:nginx_proxy][:proxy_url] %>;
+    proxy_pass <%= @proxy_url %>;
   }
 }

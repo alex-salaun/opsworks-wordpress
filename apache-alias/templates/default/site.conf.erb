@@ -1,14 +1,14 @@
 <VirtualHost *:80>
   ServerName <%= @domain %>
-  ServerAlias <%= node['apache_alias']['application_name'] %>
-  DocumentRoot /srv/www/<%= node['apache_alias']['application_name'] %>/current
+  ServerAlias <%= @app_name %>
+  DocumentRoot /srv/www/<%= @app_name %>/current
 
-  AliasMatch ^/blog(.*)$ /srv/www/<%= node['apache_alias']['application_name'] %>/current$1
+  AliasMatch ^/blog(.*)$ /srv/www/<%= @app_name %>/current$1
 
   RewriteEngine On
-  RewriteRule ^(?!/blog/)(.*) <%= node['apache_alias']['siteurl'] %>$1
+  RewriteRule ^(?!/blog/)(.*) <%= @site_url %>$1
 
-  <Directory /srv/www/<%= node['apache_alias']['application_name'] %>/current/>
+  <Directory /srv/www/<%= @app_name %>/current/>
     Options FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -26,17 +26,17 @@
   </Directory>
 
   LogLevel info
-  ErrorLog /var/log/apache2/<%= node['apache_alias']['application_name'] %>-error.log
-  CustomLog /var/log/apache2/<%= node['apache_alias']['application_name'] %>-access.log combined
-  CustomLog /var/log/apache2/<%= node['apache_alias']['application_name'] %>-ganglia.log ganglia
+  ErrorLog /var/log/apache2/<%= @app_name %>-error.log
+  CustomLog /var/log/apache2/<%= @app_name %>-access.log combined
+  CustomLog /var/log/apache2/<%= @app_name %>-ganglia.log ganglia
 
   FileETag none
 
   RewriteEngine On
-  IncludeOptional /etc/apache2/sites-available/<%= node['apache_alias']['application_name'] %>.conf.d/rewrite*
+  IncludeOptional /etc/apache2/sites-available/<%= @app_name %>.conf.d/rewrite*
 
-  SetEnv "ftp_user_password" "<%= node['apache_alias']['ftp_password'] %>"
-  SetEnv "ftp_user_name" "<%= node['apache_alias']['ftp_user_name'] %>"
+  SetEnv "ftp_user_password" "<%= @ftp_pass %>"
+  SetEnv "ftp_user_name" "<%= @ftp_user %>"
 
-  IncludeOptional /etc/apache2/sites-available/<%= node['apache_alias']['application_name'] %>.conf.d/local*
+  IncludeOptional /etc/apache2/sites-available/<%= @app_name %>.conf.d/local*
 </VirtualHost>
