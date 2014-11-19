@@ -71,6 +71,8 @@ define('FORCE_SSL_LOGIN', true);
 define('FORCE_SSL_ADMIN', true);
 <% end -%>
 
+define('WP_HOME',"<%= node['wordpress']['wp_config']['home'] %>");
+define('WP_SITEURL',"<%= node['wordpress']['wp_config']['siteurl'] %>");
 
 /**
  * WordPress Database Table prefix.
