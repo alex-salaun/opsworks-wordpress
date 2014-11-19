@@ -14,6 +14,10 @@ node[:deploy].each do |app_name, deploy|
           owner "apache"
         end
 
+        Chef::Log.info("app name : #{app_name}")
+        Chef::Log.info("app name : #{app_name.gsub('-', '_')}")
+        Chef::Log.info("deploy : #{deploy}")
+
         variables(
             :app_name   => app_name.gsub('-', '_'),
             :domain     => (deploy[:domains].first),
