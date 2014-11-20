@@ -1,8 +1,11 @@
 Chef::Log.info("Configure apache alias")
 
 node[:deploy].each do |app_name, deploy|
+  Chef::Log.info("deploy : #{deploy}")
 
   if defined?(deploy[:application_type]) && deploy[:application_type] == 'php'
+    Chef::Log.info("Update conf file : /etc/apache2/sites-available/#{app_name.gsub('-', '_')}.conf")
+
     template "/etc/apache2/sites-available/#{app_name.gsub('-', '_')}.conf" do
       source "site.erb"
 

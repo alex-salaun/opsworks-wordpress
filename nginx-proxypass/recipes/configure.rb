@@ -1,9 +1,11 @@
 Chef::Log.info("Configure Nginx Proxy Pass")
 
 node[:deploy].each do |app_name, deploy|
-  Chef::Log.info("app_name : #{app_name.gsub('-', '_')}")
+  Chef::Log.info("deploy : #{deploy}")
 
   if defined?(deploy[:application_type]) && deploy[:application_type] == 'rails'
+    Chef::Log.info("Update conf file : /etc/nginx/sites-available/#{app_name.gsub('-', '_')}")
+
     template "/etc/nginx/sites-available/#{app_name.gsub('-', '_')}" do
       source "site.erb"
 
