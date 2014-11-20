@@ -32,6 +32,12 @@ server {
     }
   }
 
+  location /blog {
+    proxy_redirect off;
+    proxy_cache off;
+    proxy_pass <%= @proxy_url %>;
+  }
+
   location /nginx_status {
     stub_status on;
     access_log off;
@@ -42,11 +48,5 @@ server {
   error_page 500 502 503 504 /500.html;
   location = /500.html {
     root /srv/www/<%= @app_name %>/current/public/;
-  }
-
-  location /blog {
-    proxy_redirect off;
-    proxy_cache off;
-    proxy_pass <%= @proxy_url %>;
   }
 }
