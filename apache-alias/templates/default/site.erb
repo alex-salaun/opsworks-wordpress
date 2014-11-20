@@ -6,7 +6,7 @@
   AliasMatch ^/blog(.*)$ /srv/www/<%= @app_name %>/current$1
 
   RewriteEngine On
-  RewriteRule ^(?!/blog)(.*) <%= @site_url %>$1
+  RewriteRule ^(?!/blog)(.*) <%= @site_url %>$1 [R=301,L]
 
   <Directory /srv/www/<%= @app_name %>/current/>
     Options FollowSymLinks

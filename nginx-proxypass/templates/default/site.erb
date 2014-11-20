@@ -4,13 +4,16 @@ upstream unicorn_<%= @domain %> {
 
 server {
   listen 80;
-  server_name <%= @domain %>;
+  server_name <%= @domain %> <%= @app_name %>;
 
   access_log /var/log/nginx/<%= @domain %>.access.log;
 
   keepalive_timeout 5;
 
   root /srv/www/<%= @app_name %>/current/public/;
+
+  rewrite ^/blog$ /blog/ permanent;
+  rewrite ^/blog/wp-admin$ /blog/wp-admin/ permanent;
 
   location / {
     try_files $uri/index.html $uri/index.htm @unicorn;
