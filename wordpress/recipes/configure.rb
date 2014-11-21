@@ -46,6 +46,18 @@ node[:deploy].each do |app_name, deploy|
         )
     end
 
+    template "#{deploy[:deploy_to]}/current/.htaccess" do
+        source "htaccess.erb"
+        mode 0660
+        group deploy[:group]
+
+        if platform?("ubuntu")
+          owner "www-data"
+        elsif platform?("amazon")
+          owner "apache"
+        end
+    end
+
 	# Import Wordpress database backup from file if it exists
 	mysql_command = "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]}  #{deploy[:database][:database]}"
 
