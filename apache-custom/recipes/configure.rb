@@ -12,7 +12,8 @@ node[:deploy].each do |app_name, deploy|
         :domain     => (deploy[:domains].first),
         :ftp_user   => deploy[:environment][:ftp_user_name],
         :ftp_pass   => deploy[:environment][:ftp_user_password],
-        :site_url   => deploy[:environment][:blog_siteurl]
+        :site_url   => deploy[:environment][:blog_siteurl],
+        :site_host  => deploy[:environment][:blog_site_host]
       )
     end
 
