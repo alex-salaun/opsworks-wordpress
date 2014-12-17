@@ -20,7 +20,16 @@ server {
 
   rewrite ^/blog$ /blog/ permanent;
   rewrite ^/blog/wp-admin$ /blog/wp-admin/ permanent;
-  rewrite ^(.*[^/])$ $1/ permanent;
+
+  if ($uri !~ "^/robots.txt") {
+   set $rule_0 1$rule_0;
+  }
+  if ($uri !~ "^/blog") {
+    set $rule_0 2$rule_0;
+  }
+  if ($rule_0 = "21") {
+    rewrite ^(.*[^/])$ $1/ permanent;
+  }
 
   client_max_body_size 11M;
 
@@ -101,7 +110,16 @@ server {
 
   rewrite ^/blog$ /blog/ permanent;
   rewrite ^/blog/wp-admin$ /blog/wp-admin/ permanent;
-  rewrite ^(.*[^/])$ $1/ permanent;
+
+  if ($uri !~ "^/robots.txt") {
+   set $rule_0 1$rule_0;
+  }
+  if ($uri !~ "^/blog") {
+    set $rule_0 2$rule_0;
+  }
+  if ($rule_0 = "21") {
+    rewrite ^(.*[^/])$ $1/ permanent;
+  }
 
   client_max_body_size 11M;
 
