@@ -27,7 +27,10 @@ server {
   if ($uri !~ "^/logos/") {
     set $rule_0 4$rule_0;
   }
-  if ($rule_0 = "4321") {
+  if ($uri !~ ".jpg|.svg|.png|.jpeg|.html|.css|.js") {
+    set $rule_0 5$rule_0;
+  }
+  if ($rule_0 = "54321") {
     rewrite ^(.*[^/])$ $1/ permanent;
   }
 
