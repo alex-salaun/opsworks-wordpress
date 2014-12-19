@@ -30,7 +30,10 @@ server {
   if ($uri !~ ".jpg|.svg|.png|.jpeg|.html|.css|.js") {
     set $rule_0 5$rule_0;
   }
-  if ($rule_0 = "54321") {
+  if ($uri !~ "^/projects") {
+    set $rule_0 6$rule_0;
+  }
+  if ($rule_0 = "654321") {
     rewrite ^(.*[^/])$ $1/ permanent;
   }
 
