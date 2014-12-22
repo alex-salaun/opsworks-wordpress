@@ -12,6 +12,10 @@ server {
 
   root /srv/www/<%= @app_name %>/current/public/;
 
+  if ($http_host !~* "<%= @domain %>") {
+    rewrite ^(.*)$ http://<%= @domain %>$1 permanent;
+  }
+
   rewrite ^/blog$ /blog/ permanent;
   rewrite ^/blog/wp-admin$ /blog/wp-admin/ permanent;
 

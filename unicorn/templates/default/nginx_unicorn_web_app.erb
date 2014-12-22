@@ -18,6 +18,10 @@ server {
 
   root <%= @application[:absolute_document_root] %>;
 
+  if ($http_host !~* "<%= @application[:domains].first %>") {
+    rewrite ^(.*)$ http://<%= @application[:domains].first %>$1 permanent;
+  }
+
   rewrite ^/blog$ /blog/ permanent;
   rewrite ^/blog/wp-admin$ /blog/wp-admin/ permanent;
 
@@ -121,6 +125,10 @@ server {
   keepalive_timeout 5;
 
   root <%= @application[:absolute_document_root] %>;
+
+  if ($http_host !~* "<%= @application[:domains].first %>") {
+    rewrite ^(.*)$ http://<%= @application[:domains].first %>$1 permanent;
+  }
 
   rewrite ^/blog$ /blog/ permanent;
   rewrite ^/blog/wp-admin$ /blog/wp-admin/ permanent;
