@@ -18,6 +18,7 @@ server {
 
   rewrite ^/blog$ /blog/ permanent;
   rewrite ^/blog/wp-admin$ /blog/wp-admin/ permanent;
+  rewrite ^/wp-content(.*)$ /blog/wp-content$1 permanent;
 
   if ($uri !~ "^/robots.txt") {
    set $rule_0 1$rule_0;
