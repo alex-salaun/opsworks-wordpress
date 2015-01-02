@@ -38,7 +38,7 @@ server {
   if ($uri !~ "^/logos/") {
     set $rule_0 4$rule_0;
   }
-  if ($uri !~ ".jpg|.svg|.png|.jpeg|.html|.css|.js|.xml|.pdf") {
+  if ($uri !~ ".jpg|.svg|.png|.jpeg|.html|.css|.js|.xml|.pdf|.ico") {
     set $rule_0 5$rule_0;
   }
   if ($uri !~ "^/projects") {
@@ -141,7 +141,7 @@ server {
   if ($uri !~ "^/logos/") {
     set $rule_0 4$rule_0;
   }
-  if ($uri !~ ".jpg|.svg|.png|.jpeg|.html|.css|.js|.xml|.pdf") {
+  if ($uri !~ ".jpg|.svg|.png|.jpeg|.html|.css|.js|.xml|.pdf|.ico") {
     set $rule_0 5$rule_0;
   }
   if ($uri !~ "^/projects") {
