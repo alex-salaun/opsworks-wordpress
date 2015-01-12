@@ -12,6 +12,14 @@ server {
 
   root /srv/www/<%= @app_name %>/current/public/;
 
+  if ($http_host = "job.siliconsalad.com") {
+    rewrite ^(.*)$ http://www.siliconsalad.com/recrutement/ permanent;
+  }
+
+  if ($http_host = "jobs.siliconsalad.com") {
+    rewrite ^(.*)$ http://www.siliconsalad.com/recrutement/ permanent;
+  }
+
   if ($http_host !~* "<%= @domain %>") {
     rewrite ^(.*)$ http://<%= @domain %>$1 permanent;
   }

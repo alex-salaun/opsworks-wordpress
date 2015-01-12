@@ -18,6 +18,14 @@ server {
 
   root <%= @application[:absolute_document_root] %>;
 
+  if ($http_host = "job.siliconsalad.com") {
+    rewrite ^(.*)$ http://www.siliconsalad.com/recrutement/ permanent;
+  }
+
+  if ($http_host = "jobs.siliconsalad.com") {
+    rewrite ^(.*)$ http://www.siliconsalad.com/recrutement/ permanent;
+  }
+
   if ($http_host !~* "<%= @application[:domains].first %>") {
     rewrite ^(.*)$ http://<%= @application[:domains].first %>$1 permanent;
   }
