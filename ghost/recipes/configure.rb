@@ -20,7 +20,7 @@ node[:deploy].each do |app_name, deploy|
     )
   end
 
-  script "setup ghost" do
+  script "setup_ghost" do
     interpreter "bash"
     user "deploy"
     cwd "#{deploy[:deploy_to]}/current/"
