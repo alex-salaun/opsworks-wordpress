@@ -1,6 +1,11 @@
 node[:deploy].each do |app_name, deploy|
   Chef::Log.info("Setup Ghost")
 
+  if defined?(deploy[:application_type]) && deploy[:application_type] != 'static'
+    Chef::Log.debug("Skipping ghost configure application #{app_name} as it is not defined as ghost blog")
+    next
+  end
+
   template "#{deploy[:deploy_to]}/current/config.js" do
     source "config.js.erb"
     group deploy[:group]
