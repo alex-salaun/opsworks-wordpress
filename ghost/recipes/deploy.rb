@@ -7,7 +7,7 @@ node[:deploy].each do |app_name, deploy|
       user "deploy"
       cwd "#{deploy[:deploy_to]}/current/"
       code <<-EOH
-          npm start --production
+          pm2 restart index
       EOH
     end
   end
