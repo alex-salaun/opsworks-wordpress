@@ -60,7 +60,12 @@ node[:deploy].each do |app_name, deploy|
         npm cache clean
         npm install --production
         npm install pm2 -g
-        pm2 start index.js
+        echo "export NODE_ENV=production" >> ~/.profile
+        source ~/.profile
+        pm2 kill
+        pm2 start index.js --name ghost
+        pm2 dump
+        pm2 startup ubuntu
       EOH
     end
   end
