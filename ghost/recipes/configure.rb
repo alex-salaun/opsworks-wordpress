@@ -23,7 +23,7 @@ node[:deploy].each do |app_name, deploy|
 
     script "setup_ghost" do
       interpreter "bash"
-      user "deploy"
+      user "root"
       cwd "#{deploy[:deploy_to]}/current/"
       code <<-EOH
         npm cache clean
