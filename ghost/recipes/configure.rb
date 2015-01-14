@@ -26,6 +26,7 @@ node[:deploy].each do |app_name, deploy|
       user "deploy"
       cwd "#{deploy[:deploy_to]}/current/"
       code <<-EOH
+        npm cache clean
         npm install --production
       EOH
     end
