@@ -4,7 +4,7 @@ node[:deploy].each do |app_name, deploy|
 
     script "start_npm" do
       interpreter "bash"
-      user "deploy"
+      user "root"
       cwd "#{deploy[:deploy_to]}/current/"
       code <<-EOH
           pm2 restart ghost
