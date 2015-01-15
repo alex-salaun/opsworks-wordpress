@@ -9,7 +9,8 @@ node[:deploy].each do |app_name, deploy|
       source "site.erb"
 
       variables(
-        :app_name   => app_name.gsub('-', '_')
+        :app_name   => app_name.gsub('-', '_'),
+        :my_ip      => (node[:my_ip] rescue '10.0.0.0/8')
       )
     end
 
