@@ -7,7 +7,7 @@ application_name = node[:opsworks][:applications].each do |application|
   Chef::Log.info("Deploy : #{deploy.inspect}")
 
   application_name = application[:name].gsub('-', '_')
-  unless deploy[application_name.to_sym][:environment][:my_ip].blank?
+  if deploy[application_name.to_sym] && deploy[application_name.to_sym][:environment][:my_ip].present?
     my_ip = deploy[application_name.to_sym][:environment][:my_ip]
   end
 end
