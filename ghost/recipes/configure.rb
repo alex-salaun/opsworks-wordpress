@@ -9,9 +9,7 @@ node[:deploy].each do |app_name, deploy|
       source "site.erb"
 
       variables(
-        :proxy_url  => deploy[:environment][:proxy_url],
-        :app_name   => app_name.gsub('-', '_'),
-        :domain     => (deploy[:domains].first)
+        :app_name   => app_name.gsub('-', '_')
       )
     end
 
