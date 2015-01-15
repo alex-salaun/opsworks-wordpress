@@ -5,7 +5,7 @@ server {
   real_ip_header   X-Forwarded-For;
 
   satisfy any;
-  allow <%= @application[:my_ip] || '10.0.0.0/8' %>;
+  allow <%= node['nginx_custom_ip']['my_ip'] %>;
   deny all;
   auth_basic "Restricted Access for <%= node[:hostname] %>  staging";
   auth_basic_user_file /etc/nginx/conf.d/htpasswd;
