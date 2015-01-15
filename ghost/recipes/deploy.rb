@@ -26,7 +26,8 @@ node[:deploy].each do |app_name, deploy|
       user "root"
       cwd "#{deploy[:deploy_to]}/current/"
       code <<-EOH
-          pm2 restart ghost
+          killall node
+          nohup npm start --production > /dev/null 2>&1 &
       EOH
     end
   end
