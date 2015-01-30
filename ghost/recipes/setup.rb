@@ -11,7 +11,8 @@ node[:deploy].each do |app_name, deploy|
           mkdir content/apps
           mkdir content/data
           mkdir content/images
-          chown -R deploy:www-data content
+          chown -R www-data:www-data content
+          chmod -R 777 content
       EOH
     end
   end
