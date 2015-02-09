@@ -3,13 +3,6 @@
   ServerAlias <%= @app_name %>
   DocumentRoot /srv/www/<%= @app_name %>/current
 
-  AliasMatch ^/blog(.*)$ /srv/www/<%= @app_name %>/current$1
-
-  RewriteEngine On
-  RewriteCond %{HTTP:X-Origin-Server} !=nginx-proxy-pass
-  RewriteRule (.*) <%= @site_host %>$1 [R=301,L]
-  RewriteRule ^(?!/blog)(.*) <%= @site_url %>$1 [R=301,L]
-
   <Directory /srv/www/<%= @app_name %>/current/>
     Options FollowSymLinks
     AllowOverride All
