@@ -10,8 +10,8 @@ node[:deploy].each do |app_name, deploy|
       variables(
         :app_name   => app_name.gsub('-', '_'),
         :domain     => (deploy[:domains].first),
-        :ftp_user   => deploy[:environment][:ftp_user_name],
-        :ftp_pass   => deploy[:environment][:ftp_user_password]
+        :ftp_user   => node[:ftp][:user_name],
+        :ftp_pass   => node[:ftp][:user_password]
       )
     end
 
