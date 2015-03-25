@@ -18,7 +18,7 @@ default[:proftpd] = {
   :group => {
     :name => "ftpgroup"
   },
-  :folder_path => "/srv/www/blog_staging",
+  :folder_path => "/srv/www/blog_production",
   :passive_ports => "1024 1048",
   :elastic_ip => instance_elastic_ip,
   :server_name => instance_dns_name
