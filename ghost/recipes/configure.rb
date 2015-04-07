@@ -32,11 +32,15 @@ node[:deploy].each do |app_name, deploy|
       end
 
       variables(
-        :database   => (deploy[:database][:database] rescue nil),
-        :user       => (deploy[:database][:username] rescue nil),
-        :password   => (deploy[:database][:password] rescue nil),
-        :host       => (deploy[:database][:host] rescue nil),
-        :domain     => (deploy[:domains].first)
+        :database         => (deploy[:database][:database] rescue nil),
+        :user             => (deploy[:database][:username] rescue nil),
+        :password         => (deploy[:database][:password] rescue nil),
+        :host             => (deploy[:database][:host] rescue nil),
+        :domain           => (deploy[:domains].first),
+        :s3_access_id     => (deploy[:s3][:access_id] rescue nil),
+        :s3_access_secret => (deploy[:s3][:access_secret] rescue nil),
+        :s3_bucket        => (deploy[:s3][:bucket] rescue nil),
+        :s3_region        => (deploy[:s3][:region] rescue nil)
       )
     end
 
