@@ -37,10 +37,10 @@ node[:deploy].each do |app_name, deploy|
         :password         => (deploy[:database][:password] rescue nil),
         :host             => (deploy[:database][:host] rescue nil),
         :domain           => (deploy[:domains].first),
-        :s3_access_id     => (deploy[:s3][:access_id] rescue nil),
-        :s3_access_secret => (deploy[:s3][:access_secret] rescue nil),
-        :s3_bucket        => (deploy[:s3][:bucket] rescue nil),
-        :s3_region        => (deploy[:s3][:region] rescue nil)
+        :s3_access_id     => (node[:s3][:access_id] rescue nil),
+        :s3_access_secret => (node[:s3][:access_secret] rescue nil),
+        :s3_bucket        => (node[:s3][:bucket] rescue nil),
+        :s3_region        => (node[:s3][:region] rescue nil)
       )
     end
 
