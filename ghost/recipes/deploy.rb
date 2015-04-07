@@ -31,6 +31,7 @@ node[:deploy].each do |app_name, deploy|
       cwd "#{deploy[:deploy_to]}/current/"
       code <<-EOH
           killall node
+          npm install --production
           ln -s #{deploy[:deploy_to]}/current/content/themes /srv/www/content/themes
           nohup npm start --production > /dev/null 2>&1 &
       EOH
